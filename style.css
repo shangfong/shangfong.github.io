@@ -1,8 +1,8 @@
 body {
 margin: 0;
-font-family: Arial, sans-serif;
 background: #0d1117;
 color: white;
+font-family: Arial, sans-serif;
 }
 
 header {
@@ -21,7 +21,7 @@ gap: 10px;
 padding: 20px;
 }
 
-button {
+.tab {
 border: none;
 padding: 12px 20px;
 cursor: pointer;
@@ -29,7 +29,7 @@ background: #222;
 color: white;
 }
 
-button.active {
+.tab.active {
 background: #e10600;
 }
 
@@ -44,44 +44,17 @@ display: block;
 
 .event-card {
 background: #161b22;
-margin-bottom: 20px;
-border-radius: 10px;
-overflow: hidden;
-padding: 20px;
-}
-
-.event-card img {
-width: 100%;
-max-height: 350px;
-object-fit: contain;
-background: white;
 border-radius: 8px;
+padding: 20px;
+margin-bottom: 20px;
 }
 
 .session {
-padding: 8px 0;
+padding: 6px 0;
 border-bottom: 1px solid #333;
 }
 
-#countdownContainer {
-margin-top: 20px;
-}
-
-.countdown-grid {
-display: flex;
-gap: 15px;
-flex-wrap: wrap;
-}
-
-.countdown-grid div {
-background: #161b22;
-padding: 15px;
-border-radius: 8px;
-min-width: 90px;
-text-align: center;
-}
-
-.countdown-grid strong {
-display: block;
-font-size: 2rem;
+#countdown {
+margin-top: 15px;
+font-size: 1.2rem;
 }
