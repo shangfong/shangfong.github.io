@@ -4,6 +4,80 @@ async function loadData() {
     const f2 = await fetch("./data/f2.json").then(r => r.json());
     const motorsports = await fetch("./data/motorsports.json").then(r => r.json());
 
+function startCountdown(targetDate) {
+
+    const countdown =
+        document.getElementById("countdown");
+
+    function update() {
+
+        const now = new Date();
+
+        const target =
+            new Date(targetDate);
+
+        const diff =
+            target - now;
+
+        if (diff <= 0) {
+
+            countdown.innerHTML =
+                "🏁 Event Started";
+
+            return;
+        }
+
+        const days =
+            Math.floor(diff / (1000 * 60 * 60 * 24));
+
+        const hours =
+            Math.floor(
+                (diff % (1000 * 60 * 60 * 24))
+                / (1000 * 60 * 60)
+            );
+
+        const minutes =
+            Math.floor(
+                (diff % (1000 * 60 * 60))
+                / (1000 * 60)
+            );
+
+        const seconds =
+            Math.floor(
+                (diff % (1000 * 60))
+                / 1000
+            );
+
+        countdown.innerHTML = `
+            <div class="countdown-grid">
+                <div>
+                    <strong>${days}</strong>
+                    <span>Days</span>
+                </div>
+
+                <div>
+                    <strong>${hours}</strong>
+                    <span>Hours</span>
+                </div>
+
+                <div>
+                    <strong>${minutes}</strong>
+                    <span>Minutes</span>
+                </div>
+
+                <div>
+                    <strong>${seconds}</strong>
+                    <span>Seconds</span>
+                </div>
+            </div>
+        `;
+    }
+
+    update();
+
+    setInterval(update, 1000);
+}
+    
     renderHero(f1);
 
     renderSeries("f1", f1);
@@ -18,6 +92,10 @@ function localTime(time) {
 function renderHero(data) {
 
     const next = data.events[0];
+
+    startCountdown(
+    next.sessions[next.sessions.length - 1].time
+);
 
     document.getElementById("nextEvent").innerHTML = `
         <h3>${next.name}</h3>
