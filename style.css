@@ -46,3 +46,30 @@ button{
     max-width:100%;
     background:white;
 }
+
+#countdownContainer{
+    margin-top:20px;
+}
+
+.countdown-grid{
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.countdown-grid div{
+    background:#161b22;
+    padding:15px;
+    min-width:100px;
+    border-radius:8px;
+    text-align:center;
+}
+
+.countdown-grid strong{
+    display:block;
+    font-size:2rem;
+}
+
+.countdown-grid span{
+    color:#aaa;
+}
