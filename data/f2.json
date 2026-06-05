@@ -1,0 +1,16 @@
+{
+  "events": [
+    {
+      "name": "Silverstone Formula 2",
+      "location": "Silverstone",
+      "track": "Silverstone Circuit",
+      "trackImage": "https://upload.wikimedia.org/wikipedia/commons/1/12/Silverstone_Circuit_2020.png",
+      "sessions": [
+        {
+          "name": "Feature Race",
+          "time": "2026-07-05T09:00:00Z"
+        }
+      ]
+    }
+  ]
+}
