@@ -1,4 +1,3 @@
 # shangfong.github.io
 
-# Proof of Concept
-# Inprogress
+# Proof of Concept - Inprogess
