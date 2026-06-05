@@ -1,118 +1,169 @@
 async function loadData() {
 
-    const f1 = await fetch("./data/f1.json").then(r => r.json());
-    const f2 = await fetch("./data/f2.json").then(r => r.json());
-    const motorsports = await fetch("./data/motorsports.json").then(r => r.json());
+```
+try {
 
-function startCountdown(targetDate) {
+    const f1 =
+        await fetch("./data/f1.json")
+        .then(r => r.json());
 
-    const countdown =
-        document.getElementById("countdown");
+    const f2 =
+        await fetch("./data/f2.json")
+        .then(r => r.json());
 
-    function update() {
+    const motorsports =
+        await fetch("./data/motorsports.json")
+        .then(r => r.json());
 
-        const now = new Date();
-
-        const target =
-            new Date(targetDate);
-
-        const diff =
-            target - now;
-
-        if (diff <= 0) {
-
-            countdown.innerHTML =
-                "🏁 Event Started";
-
-            return;
-        }
-
-        const days =
-            Math.floor(diff / (1000 * 60 * 60 * 24));
-
-        const hours =
-            Math.floor(
-                (diff % (1000 * 60 * 60 * 24))
-                / (1000 * 60 * 60)
-            );
-
-        const minutes =
-            Math.floor(
-                (diff % (1000 * 60 * 60))
-                / (1000 * 60)
-            );
-
-        const seconds =
-            Math.floor(
-                (diff % (1000 * 60))
-                / 1000
-            );
-
-        countdown.innerHTML = `
-            <div class="countdown-grid">
-                <div>
-                    <strong>${days}</strong>
-                    <span>Days</span>
-                </div>
-
-                <div>
-                    <strong>${hours}</strong>
-                    <span>Hours</span>
-                </div>
-
-                <div>
-                    <strong>${minutes}</strong>
-                    <span>Minutes</span>
-                </div>
-
-                <div>
-                    <strong>${seconds}</strong>
-                    <span>Seconds</span>
-                </div>
-            </div>
-        `;
-    }
-
-    update();
-
-    setInterval(update, 1000);
-}
-    
     renderHero(f1);
 
     renderSeries("f1", f1);
     renderSeries("f2", f2);
     renderSeries("motorsports", motorsports);
+
+} catch (error) {
+
+    console.error(error);
+
+    document.getElementById("nextEvent").innerHTML =
+        "Error loading schedule data.";
+}
+```
+
 }
 
 function localTime(time) {
-    return new Date(time).toLocaleString();
+
+```
+return new Date(time).toLocaleString();
+```
+
+}
+
+function getNextSession(event) {
+
+```
+const now = new Date();
+
+return event.sessions.find(
+    session => new Date(session.time) > now
+);
+```
+
+}
+
+function startCountdown(session) {
+
+```
+const countdown =
+    document.getElementById("countdown");
+
+function update() {
+
+    const diff =
+        new Date(session.time) - new Date();
+
+    if (diff <= 0) {
+
+        countdown.innerHTML =
+            "🏁 Session Started";
+
+        return;
+    }
+
+    const days =
+        Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    const hours =
+        Math.floor(
+            (diff % (1000 * 60 * 60 * 24))
+            / (1000 * 60 * 60)
+        );
+
+    const minutes =
+        Math.floor(
+            (diff % (1000 * 60 * 60))
+            / (1000 * 60)
+        );
+
+    const seconds =
+        Math.floor(
+            (diff % (1000 * 60))
+            / 1000
+        );
+
+    countdown.innerHTML = `
+        <p><strong>${session.name}</strong></p>
+
+        <div class="countdown-grid">
+
+            <div>
+                <strong>${days}</strong>
+                Days
+            </div>
+
+            <div>
+                <strong>${hours}</strong>
+                Hours
+            </div>
+
+            <div>
+                <strong>${minutes}</strong>
+                Minutes
+            </div>
+
+            <div>
+                <strong>${seconds}</strong>
+                Seconds
+            </div>
+
+        </div>
+    `;
+}
+
+update();
+
+setInterval(update, 1000);
+```
+
 }
 
 function renderHero(data) {
 
-    const next = data.events[0];
+```
+const event = data.events[0];
 
-    startCountdown(
-    next.sessions[next.sessions.length - 1].time
-);
+const nextSession =
+    getNextSession(event);
 
-    document.getElementById("nextEvent").innerHTML = `
-        <h3>${next.name}</h3>
-        <p>${next.location}</p>
-        <p>Times shown in your local timezone.</p>
-    `;
+document.getElementById("nextEvent").innerHTML = `
+    <h3>${event.name}</h3>
+    <p>${event.location}</p>
+    <p>Times automatically converted to your local timezone.</p>
+`;
+
+if (nextSession) {
+    startCountdown(nextSession);
+}
+```
+
 }
 
 function renderSeries(containerId, data) {
 
-    const container = document.getElementById(containerId);
+```
+const container =
+    document.getElementById(containerId);
 
-    container.innerHTML = data.events.map(event => `
+container.innerHTML =
+    data.events.map(event => `
 
         <div class="event-card">
 
-            <img src="${event.trackImage}" alt="${event.track}" />
+            <img
+                src="${event.trackImage}"
+                alt="${event.track}"
+            >
 
             <h2>${event.name}</h2>
 
@@ -121,30 +172,57 @@ function renderSeries(containerId, data) {
             <p>${event.track}</p>
 
             ${event.sessions.map(session => `
-                <div>
-                    <strong>${session.name}</strong>
-                    -
+
+                <div class="session">
+
+                    <strong>
+                        ${session.name}
+                    </strong>
+
+                    <br>
+
                     ${localTime(session.time)}
+
                 </div>
+
             `).join("")}
 
         </div>
 
     `).join("");
+```
+
 }
 
-document.addEventListener("click", function(e){
+document.addEventListener("DOMContentLoaded", () => {
 
-    if(!e.target.classList.contains("tab"))
-        return;
+```
+document.querySelectorAll(".tab")
+    .forEach(button => {
 
-    document
-        .querySelectorAll(".tab-content")
-        .forEach(tab => tab.style.display = "none");
+        button.addEventListener("click", () => {
 
-    document.getElementById(
-        e.target.dataset.tab
-    ).style.display = "block";
-});
+            document
+                .querySelectorAll(".tab")
+                .forEach(tab =>
+                    tab.classList.remove("active"));
+
+            document
+                .querySelectorAll(".tab-content")
+                .forEach(content =>
+                    content.classList.remove("active"));
+
+            button.classList.add("active");
+
+            document
+                .getElementById(button.dataset.tab)
+                .classList.add("active");
+
+        });
+
+    });
 
 loadData();
+```
+
+});
