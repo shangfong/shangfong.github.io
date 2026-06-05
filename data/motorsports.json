@@ -1,16 +1,15 @@
 {
-  "events": [
-    {
-      "name": "24 Hours of Le Mans",
-      "location": "Le Mans, France",
-      "track": "Circuit de la Sarthe",
-      "trackImage": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Circuit_de_la_Sarthe_track_map.svg",
-      "sessions": [
-        {
-          "name": "Race Start",
-          "time": "2026-06-13T14:00:00Z"
-        }
-      ]
-    }
-  ]
+"events": [
+{
+"name": "24 Hours of Le Mans",
+"location": "Le Mans, France",
+"track": "Circuit de la Sarthe",
+"sessions": [
+{
+"name": "Race Start",
+"time": "2026-06-13T14:00:00Z"
+}
+]
+}
+]
 }
