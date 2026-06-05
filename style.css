@@ -1,75 +1,87 @@
-body{
-    background:#0d1117;
-    color:white;
-    font-family:Arial,sans-serif;
-    margin:0;
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+background: #0d1117;
+color: white;
 }
 
-h1{
-    background:#e10600;
-    margin:0;
-    padding:20px;
+header {
+background: #e10600;
+padding: 20px;
+text-align: center;
 }
 
-#hero{
-    padding:20px;
+#hero {
+padding: 20px;
 }
 
-nav{
-    display:flex;
-    gap:10px;
-    padding:20px;
+nav {
+display: flex;
+gap: 10px;
+padding: 20px;
 }
 
-button{
-    padding:10px 20px;
-    cursor:pointer;
+button {
+border: none;
+padding: 12px 20px;
+cursor: pointer;
+background: #222;
+color: white;
 }
 
-.tab-content{
-    display:none;
-    padding:20px;
+button.active {
+background: #e10600;
 }
 
-#f1{
-    display:block;
+.tab-content {
+display: none;
+padding: 20px;
 }
 
-.event-card{
-    background:#161b22;
-    padding:20px;
-    margin-bottom:20px;
-    border-radius:8px;
+.tab-content.active {
+display: block;
 }
 
-.event-card img{
-    max-width:100%;
-    background:white;
+.event-card {
+background: #161b22;
+margin-bottom: 20px;
+border-radius: 10px;
+overflow: hidden;
+padding: 20px;
 }
 
-#countdownContainer{
-    margin-top:20px;
+.event-card img {
+width: 100%;
+max-height: 350px;
+object-fit: contain;
+background: white;
+border-radius: 8px;
 }
 
-.countdown-grid{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
+.session {
+padding: 8px 0;
+border-bottom: 1px solid #333;
 }
 
-.countdown-grid div{
-    background:#161b22;
-    padding:15px;
-    min-width:100px;
-    border-radius:8px;
-    text-align:center;
+#countdownContainer {
+margin-top: 20px;
 }
 
-.countdown-grid strong{
-    display:block;
-    font-size:2rem;
+.countdown-grid {
+display: flex;
+gap: 15px;
+flex-wrap: wrap;
 }
 
-.countdown-grid span{
-    color:#aaa;
+.countdown-grid div {
+background: #161b22;
+padding: 15px;
+border-radius: 8px;
+min-width: 90px;
+text-align: center;
+}
+
+.countdown-grid strong {
+display: block;
+font-size: 2rem;
 }
